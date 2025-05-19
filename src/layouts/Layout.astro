@@ -1,0 +1,20 @@
+---
+import GlobalHead from '@components/GlobalHead.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+import '@styles/global.css';
+---
+
+<html lang='en' class='bg-[#001a24]'>
+  <head>
+    <GlobalHead />
+  </head>
+  <body class='flex flex-col min-h-screen'>
+    <Header />
+    <main class='flex-grow'>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+

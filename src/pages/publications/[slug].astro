@@ -1,0 +1,76 @@
+---
+import { type CollectionEntry, getCollection, render } from "astro:content";
+import Layout from '@layouts/Layout.astro';
+import Prose from '@components/Prose.astro';
+import Link from '@components/Link.astro';
+import TableOfContents from '@components/TableOfContents.astro';
+
+export async function getStaticPaths() {
+  const publications = (await getCollection("publications"))
+    .filter((publication) => !publication.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  return publications.map((publication) => ({
+    params: { slug: publication.id },
+    props: publication,
+  }));
+}
+type Props = CollectionEntry<"publications">;
+
+const publication = Astro.props;
+
+const mainTitlePart = publication.data.mainTitlePart;
+const secondaryTitlePart = publication.data.secondaryTitlePart;
+const authors = publication.data.authors.split(', ');
+const authorLinks = publication.data.authorLinks.split(', ');
+const authorAffiliations = publication.data.authorAffiliations.split(', ');
+const authorAffiliationsMap = publication.data.authorAffiliationsMap.split('; ');
+const externalAffiliatedLinks = publication.data.externalAffiliatedLinks
+  .split(", ")
+  .map((link) => {
+    const [name, url] = link.split(": ");
+    return { name, url };
+  });
+
+const localAffiliatedLinks = publication.data.localAffiliatedLinks
+  .split(", ")
+  .map((link) => {
+    const [name, url] = link.split(": ");
+    return { name, url };
+});
+
+const { Content, headings } = await render(publication);
+---
+
+<Layout>
+  <p class="text-3xl text-white font-semibold text-center mt-2">{publication.data.mainTitlePart}</p>
+  <p class="text-3xl text-center">{publication.data.secondaryTitlePart}</p>
+  <div class="flex gap-x-2 flex-wrap text-lg text-white mt-5 justify-center">
+    { authors.map((name, index, arr) => (
+      <p>
+        <Link href=`${authorLinks[index]}` external>{name}</Link><sup> {authorAffiliationsMap[index]}</sup>
+      </p>
+    )) }
+  </div>
+  <div class="flex gap-x-4 flex-wrap text-white mt-2 justify-center">
+    { authorAffiliations.map((affiliation, index) => (<p>{affiliation}<sup> {index + 1}</sup></p>)) }
+  </div>
+  <p class="mt-2 text-center text-white">[{publication.data.confShort}] {publication.data.conf}</p>
+
+  <div class="flex gap-x-2 flex-wrap text-white mt-5 mb-10 justify-center">
+    { externalAffiliatedLinks.map((link) => (
+      <p class="border-1 border-[#8cc2dd] rounded-full px-4 py-1">
+        <Link href=`${link.url}` external>{link.name}</Link>
+      </p>
+    )) }
+    { localAffiliatedLinks.map((link) => (
+      <p class="border-1 border-[#8cc2dd] rounded-full px-4 py-1">
+        <Link href=`/publications/${publication.id}/${link.url}` external>{link.name}</Link>
+      </p>
+    )) }
+  </div>
+  <TableOfContents headings={headings} />
+  <Prose>
+    <Content />
+  </Prose>
+</Layout>
+

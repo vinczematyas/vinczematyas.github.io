@@ -1,0 +1,94 @@
+---
+import Link from "@components/Link.astro";
+import { Image } from "astro:assets";
+
+export interface Props { publication, publicationCardImage }
+
+const { publication, publicationCardImage } = Astro.props as Props;
+
+let websitePath;
+let isLocal = false;
+if (publication.data.website !== "local") {
+  websitePath = publication.data.website;
+  isLocal = false;
+} else {
+  websitePath = `/publications/${publication.id}`;
+  isLocal = true;
+}
+
+const externalAffiliatedLinks = publication.data.externalAffiliatedLinks
+  .split(", ")
+  .map((link) => {
+    const [name, url] = link.split(": ");
+    return { name, url };
+  });
+
+const localAffiliatedLinks = publication.data.localAffiliatedLinks
+  .split(", ")
+  .map((link) => {
+    const [name, url] = link.split(": ");
+    return { name, url };
+});
+
+let authors = publication.data.authors
+  .split(", ")
+  .map((author) => {
+    const nameParts = author.split(" ");
+    const lastName = nameParts.pop();
+    const initials = nameParts.map( part => part.charAt(0) + ".").join(" ");
+    return `${initials} ${lastName}`
+  })
+  .join(", ")
+
+if (publication.data.etal === true) {
+  authors = authors + ", et al."
+}
+---
+
+<div class="grid grid-cols-1 gap-x-4 gap-y-2 lg:grid-cols-7 lg:gap-x-8 rounded-md border border-gray-600 p-4">
+  <div class="hidden lg:col-span-2 lg:flex lg:items-center lg:justify-center">
+    <Image
+      src={publicationCardImage}
+      alt={publication.data.title}
+      class="rounded-md object-cover"
+      loading="eager"
+    />
+  </div>
+
+  <div class="lg:col-span-5 flex flex-col justify-center">
+   <Link href={websitePath} class="mb-2 md:mb-3 block" external={isLocal !== true}> 
+      {publication.data.title}
+    </Link>
+
+    <div class="mt-1 flex flex-wrap gap-x-4 gap-y-1 items-center text-sm"> {authors} </div>
+
+    <div class="mt-1 flex flex-wrap gap-x-4 gap-y-1 items-center text-sm">
+      @ {publication.data.confShort}<span class="text-gray-400 text-sm">|</span>
+
+      {externalAffiliatedLinks && externalAffiliatedLinks.length > 0 && (
+        <ul class="flex flex-wrap gap-x-3 gap-y-1">
+          {externalAffiliatedLinks.map((link, index) => (
+            <li>
+              <Link href={link.url} external>
+                {link.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {localAffiliatedLinks && localAffiliatedLinks.length > 0 && (
+        <ul class="flex flex-wrap gap-x-3 gap-y-1">
+          {localAffiliatedLinks.map((link, index) => (
+            <li>
+              <Link href={`/publications/${publication.id}/${link.url}`} external>
+                {link.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </div>
+</div>
+

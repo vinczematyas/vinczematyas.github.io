@@ -1,0 +1,21 @@
+@import "@fontsource-variable/ibm-plex-sans";
+@import "@fontsource/ibm-plex-mono";
+@import "tailwindcss";
+@plugin '@tailwindcss/typography';
+
+
+body {
+  scroll-padding-top: 100px;
+  overflow-y: auto;
+  @apply bg-[#01242e];
+  @apply max-w-4xl mx-auto min-h-screen;
+  @apply lg:px-15 md:px-15 px-5;
+  @apply text-[#dddddd];
+}
+
+
+@theme {
+  --font-sans: "IBM Plex Sans Variable", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+}
+

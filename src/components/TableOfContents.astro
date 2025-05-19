@@ -1,0 +1,59 @@
+---
+import TableOfContentsHeading from "@components/TableOfContentsHeading.astro";
+import "@styles/global.css";
+
+// https://kld.dev/building-table-of-contents/
+const { headings } = Astro.props;
+const toc = buildToc(headings);
+
+export interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+function buildToc(headings: Heading[]) {
+  const toc: Heading[] = [];
+  const parentHeadings = new Map();
+
+  headings.forEach((h) => {
+    const heading = { ...h, subheadings: [] };
+
+    if (parentHeadings.size > 0) {
+      if (heading.depth > Math.min(...parentHeadings.keys())) {
+        for (let i = heading.depth; i <= Math.max(...parentHeadings.keys()); i++) {
+          if (parentHeadings.has(i)) {
+            parentHeadings.delete(i);
+          }
+        }
+        for (let i = heading.depth; i > 0; i--) {
+          if (parentHeadings.has(i)) {
+            parentHeadings.get(i).subheadings.push(heading);
+            parentHeadings.set(heading.depth, heading);
+            break;
+          }
+        }
+      } else {
+        // reset parentHeadings
+        parentHeadings.clear();
+        parentHeadings.set(heading.depth, heading);
+        toc.push(heading);
+      }
+    } else {
+      parentHeadings.set(heading.depth, heading);
+      toc.push(heading);
+    }
+  });
+  return toc;
+}
+---
+
+<details class="mb-5 rounded-lg border border-white/30">
+  <summary class="py-1 pl-3">Table of Contents</summary>
+  <nav>
+    <ul class="py-3">
+      {toc.map((heading) => <TableOfContentsHeading heading={heading} />)}
+    </ul>
+  </nav>
+</details>
+

@@ -1,0 +1,25 @@
+---
+import { mergeClassNames } from '../utils.ts';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
+export interface Props {
+  URL: string;
+  icon: string;
+  icon_size: string;
+}
+
+const { URL, icon, icon_size } = Astro.props;
+---
+
+<a
+  href={URL}
+  target={'_blank'}
+  class={ mergeClassNames(
+    `inline-block ${icon_size}`,
+    'hover:text-white',
+    'transition-colors duration-300 ease-in-out',
+  )}
+>
+  <i class={`bi bi-${icon}`}></i>
+</a>
+
