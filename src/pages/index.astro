@@ -25,27 +25,27 @@ const publications = (await getCollection('publications'))
   <div class="grid grid-cols-1 gap-x-4 lg:grid-cols-3 lg gap-x-8">
     <div class="lg:col-span-2 flex flex-col justify-center">
       <div>
-        <span class='font-[600] text-2xl text-white'>
-          Hi! I'm Mátyás
+        <span class='font-[400] text-2xl text-white'>
+          Hey! I'm Mátyás
         </span>
-        <span class='text-xl'>
+        <span class='font-[400] text-xl'>
           <Link href='https://ipa-reader.com/?text=%CB%88ma%CB%90ca%CB%90%CA%83' class="text-xl" external>
             [ˈmaːcaːʃ]
           </Link>
         </span>
       </div>
-      <p class='text-justify pt-4 pb-4'>
+      <span class='font-[400] pt-4 pb-4'>
         I'm a second-year PhD student in Machine Learning at the
         <Link href='https://www.unitn.it/en' external>University of Trento</Link>,
-        also affiliated with
+        and
         <Link href='https://www.fbk.eu/en' external>Fondazione Bruno Kessler</Link>.
-        Under the guidance of my supervisors,
+        Supervised by 
         <Link href='https://scholar.google.it/citations?user=JfcopG0AAAAJ&hl=en' external>Bruno Lepri</Link>
         and
         <Link href='https://sites.google.com/site/giovanniiacca/' external>Giovanni Iacca</Link>,
-        I'm exploring the areas of module learning and mixtures-of-mixtures.
-        My current focus is on developing deep learning architectures that leverage cooperative principles to enhance both training efficiency and generalization in RL and LM.
-      </p>
+        I work on modularity and mixtures-of-mixtures.
+        I deeply care about developing AI that is transparent and accessible for the masses beyond the hype.
+      </span>
       <SocialIcons icon_size={'text-2xl'}/>
     </div>
     <div class="hidden lg:col-span-1 lg:flex lg:items-center lg:justify-center">
@@ -57,31 +57,31 @@ const publications = (await getCollection('publications'))
     </div>
   </div>
   <p class='pt-6 pb-3'>
-    <span class='font-[500] text-xl text-white'>Updates</span>
+    <span class='text-xl text-white'>Updates</span>
     <ul>
       <li>
         <span class='font-mono'>[05/2025]:</span>
         ISCRA project accepted at
         <Link href='https://www.cineca.it/en#paragraph-id--217' external>CINECA</Link>
-        for GPU access
+        (A100s go brrr)
       </li>
       <li>
         <span class='font-mono'>[03/2025]:</span>
         Attended
-        <Link href='https://lig-alps.imag.fr/' external>ALPS 2025</Link>
-        in Aussois, France
+        <Link href='http://alps-2025.imag.fr/index.php/speakers/index.html' external>ALPS 2025</Link>
+        winter school in Aussois, France
       </li>
       <li>
         <span class='font-mono'>[02/2025]:</span>
         Attended
         <Link href='https://aaai.org/conference/aaai/aaai-25/' external>AAAI 2025</Link>
-        in Philadelphia, USA
+        conference in Philadelphia, USA
       </li>
       <li>
         <span class='font-mono'>[12/2024]:</span>
         Paper accepted at
-        <Link href='https://aaai.org/conference/aaai/aaai-25/' external>
-          AAAI 2025</Link>
+        <Link href='https://aaai.org/conference/aaai/aaai-25/' external>AAAI 2025</Link>
+        conference
       </li>
       <li>
         <span class='font-mono'>[07/2024]:</span>
@@ -93,7 +93,7 @@ const publications = (await getCollection('publications'))
         <span class='font-mono'>[06/2024]:</span>
         ISCRA project accepted at
         <Link href='https://www.cineca.it/en#paragraph-id--217' external>CINECA</Link>
-        for GPU access
+        (A100s go brrr)
       </li>
     </ul>
   </p>
@@ -112,14 +112,5 @@ const publications = (await getCollection('publications'))
       </li>
     ))}
   </ul>
-  <p class='justify-between flex pt-6 pb-3'>
-    <span class='font-[500] text-xl text-white'>
-      Blog posts
-    </span>
-    <Link href='/blog'>
-      see all
-    </Link>
-  </p>
-  <span>Coming soon!</span>
 </Layout>
 
