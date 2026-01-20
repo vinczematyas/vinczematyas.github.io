@@ -4,14 +4,40 @@ import { mergeClassNames } from "../utils.ts";
 <article
   class={mergeClassNames(
     "mx-auto max-w-screen-md",
-    "prose dark:prose-invert",
+    "prose",
     "prose-headings:mt-3 prose-headings:mb-2 prose-p:m-0",
     "prose-h1:font-bold prose-h1:text-2xl",
-    "prose-a:text-blue-600",
     "prose-p:text-base/5.5",
     "prose-img:rounded-xl",
     "prose-hr:my-6",
   )}>
   <slot />
 </article>
+
+<style>
+  :global(.prose) {
+    color: var(--text);
+  }
+  :global(.prose h1),
+  :global(.prose h2),
+  :global(.prose h3),
+  :global(.prose h4),
+  :global(.prose h5),
+  :global(.prose h6) {
+    color: var(--text);
+  }
+  :global(.prose a) {
+    color: var(--link);
+  }
+  :global(.prose a:hover) {
+    color: var(--link-hover);
+  }
+  :global(.prose hr) {
+    border-color: var(--border);
+  }
+  :global(.prose blockquote) {
+    border-left-color: var(--border);
+    color: var(--muted);
+  }
+</style>
 

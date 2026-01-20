@@ -10,11 +10,21 @@ import '@styles/global.css';
     <script is:inline>
       (() => {
         const root = document.documentElement;
-        const stored = typeof localStorage !== "undefined" ? localStorage.getItem("theme") : null;
-        const prefersLight = typeof window !== "undefined" && window.matchMedia?.("(prefers-color-scheme: light)").matches;
-        const theme = stored ?? (prefersLight ? "light" : "dark");
-        root.classList.toggle("theme-light", theme === "light");
-        root.classList.toggle("theme-dark", theme !== "light");
+        const mql = window.matchMedia ? window.matchMedia("(prefers-color-scheme: light)") : null;
+
+        const applyTheme = (isLight) => {
+          root.classList.toggle("theme-light", isLight);
+          root.classList.toggle("theme-dark", !isLight);
+          root.style.colorScheme = isLight ? "light" : "dark";
+        };
+
+        const setFromSystem = () => applyTheme(mql?.matches ?? false);
+        setFromSystem();
+
+        mql?.addEventListener?.("change", (event) => {
+          // Always follow system; no stored overrides
+          applyTheme(event.matches);
+        });
       })();
     </script>
     <GlobalHead />
