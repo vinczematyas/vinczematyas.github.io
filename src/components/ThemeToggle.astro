@@ -1,0 +1,64 @@
+<button
+  id="theme-toggle"
+  type="button"
+  class="relative inline-flex h-[15px] w-[15px] items-center justify-center align-middle leading-none transition-colors"
+  aria-label="Toggle color theme"
+>
+  <svg class="theme-icon" viewBox="0 0 24 24" aria-hidden="true">
+    <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.6" />
+    <path class="fill-dark" d="M12 2a10 10 0 0 1 0 20Z" fill="currentColor" />
+    <path class="fill-light" d="M12 2a10 10 0 0 0 0 20Z" fill="currentColor" />
+  </svg>
+</button>
+
+<style>
+  :global(#theme-toggle) {
+    color: var(--link);
+  }
+  :global(#theme-toggle:hover),
+  :global(#theme-toggle:focus-visible) {
+    color: var(--link-hover);
+  }
+  :global(.theme-icon) {
+    width: 0.90em;
+    height: 0.90em;
+    display: block;
+  }
+  :global(.fill-light), :global(.fill-dark) {
+    transition: opacity 80ms ease;
+  }
+  :global(.fill-light) {
+    opacity: 0;
+  }
+  :global(.theme-light .fill-light) {
+    opacity: 1;
+  }
+  :global(.theme-light .fill-dark) {
+    opacity: 0;
+  }
+</style>
+
+<script>
+  (() => {
+    const root = document.documentElement;
+    const button = document.getElementById("theme-toggle");
+    if (!button) return;
+
+    const applyTheme = (theme) => {
+      const isLight = theme === "light";
+      root.classList.toggle("theme-light", isLight);
+      root.classList.toggle("theme-dark", !isLight);
+      button.setAttribute("aria-label", isLight ? "Switch to dark mode" : "Switch to light mode");
+      localStorage.setItem("theme", theme);
+    };
+
+    const stored = localStorage.getItem("theme");
+    const prefersLight = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches;
+    applyTheme(stored ?? (prefersLight ? "light" : "dark"));
+
+    button.addEventListener("click", () => {
+      const next = root.classList.contains("theme-light") ? "dark" : "light";
+      applyTheme(next);
+    });
+  })();
+</script>

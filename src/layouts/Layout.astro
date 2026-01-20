@@ -5,8 +5,18 @@ import Footer from '@components/Footer.astro';
 import '@styles/global.css';
 ---
 
-<html lang='en' class='bg-[#001a24]'>
+<html lang='en'>
   <head>
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        const stored = typeof localStorage !== "undefined" ? localStorage.getItem("theme") : null;
+        const prefersLight = typeof window !== "undefined" && window.matchMedia?.("(prefers-color-scheme: light)").matches;
+        const theme = stored ?? (prefersLight ? "light" : "dark");
+        root.classList.toggle("theme-light", theme === "light");
+        root.classList.toggle("theme-dark", theme !== "light");
+      })();
+    </script>
     <GlobalHead />
   </head>
   <body class='flex flex-col min-h-screen'>

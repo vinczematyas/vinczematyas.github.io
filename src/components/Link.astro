@@ -12,9 +12,11 @@ const { href, external, color } = Astro.props;
 
 <a
   href={href}
-  target={external ? '_blank' : '_self'} 
-  class={ 'inline-block text-[#8cc2dd] hover:underline hover:underline-offset-[2px]' }
+  target={external ? '_blank' : '_self'}
+  rel={external ? 'noreferrer' : undefined}
+  class="inline-block text-[var(--link)] hover:underline hover:underline-offset-[2px] hover:text-[var(--link-hover)]"
 >
+
   <slot />
 </a>
 

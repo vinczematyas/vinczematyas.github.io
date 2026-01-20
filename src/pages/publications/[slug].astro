@@ -42,28 +42,28 @@ const { Content, headings } = await render(publication);
 ---
 
 <Layout>
-  <p class="text-3xl text-white font-semibold text-center mt-2">{publication.data.mainTitlePart}</p>
-  <p class="text-3xl text-center">{publication.data.secondaryTitlePart}</p>
-  <div class="flex gap-x-2 flex-wrap text-lg text-white mt-5 justify-center">
+  <p class="text-3xl text-[var(--text)] font-semibold text-center mt-2">{publication.data.mainTitlePart}</p>
+  <p class="text-3xl text-center text-[var(--text)]">{publication.data.secondaryTitlePart}</p>
+  <div class="flex gap-x-2 flex-wrap text-lg text-[var(--text)] mt-5 justify-center">
     { authors.map((name, index, arr) => (
       <p>
         <Link href=`${authorLinks[index]}` external>{name}</Link><sup> {authorAffiliationsMap[index]}</sup>
       </p>
     )) }
   </div>
-  <div class="flex gap-x-4 flex-wrap text-white mt-2 justify-center">
+  <div class="flex gap-x-4 flex-wrap text-[var(--muted)] mt-2 justify-center">
     { authorAffiliations.map((affiliation, index) => (<p>{affiliation}<sup> {index + 1}</sup></p>)) }
   </div>
-  <p class="mt-2 text-center text-white">[{publication.data.confShort}] {publication.data.conf}</p>
+  <p class="mt-2 text-center text-[var(--muted)]">[{publication.data.confShort}] {publication.data.conf}</p>
 
-  <div class="flex gap-x-2 flex-wrap text-white mt-5 mb-10 justify-center">
+  <div class="flex gap-x-2 flex-wrap text-[var(--text)] mt-5 mb-10 justify-center">
     { externalAffiliatedLinks.map((link) => (
-      <p class="border-1 border-[#8cc2dd] rounded-full px-4 py-1">
+      <p class="border border-[var(--link)] text-[var(--text)] rounded-full px-4 py-1">
         <Link href=`${link.url}` external>{link.name}</Link>
       </p>
     )) }
     { localAffiliatedLinks.map((link) => (
-      <p class="border-1 border-[#8cc2dd] rounded-full px-4 py-1">
+      <p class="border border-[var(--link)] text-[var(--text)] rounded-full px-4 py-1">
         <Link href=`/publications/${publication.id}/${link.url}` external>{link.name}</Link>
       </p>
     )) }

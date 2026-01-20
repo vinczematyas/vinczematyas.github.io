@@ -1,18 +1,17 @@
 ---
 import Link from '@components/Link.astro';
+import ThemeToggle from '@components/ThemeToggle.astro';
 ---
 
 <header class="text-center font-mono pt-3 pb-10">
-  <div>
+  <div class="flex items-center justify-center gap-2">
     <Link href='/'>home</Link>
-    <span>
-      {'/'}
-    </span>
+    <span class="text-[var(--muted)]">{'/'}</span>
     <Link href='/publications'>publications</Link>
-    <span>
-      {'/'}
-    </span>
+    <span class="text-[var(--muted)]">{'/'}</span>
     <Link href='/CV_MatyasVincze.pdf' external=true>cv</Link>
+    <span class="text-[var(--muted)]">{'/'}</span>
+    <ThemeToggle />
   </div>
 </header>
 

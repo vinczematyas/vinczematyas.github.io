@@ -19,6 +19,11 @@ export default defineConfig({
                 provider: fontProviders.google(),
                 name: "Cascadia Mono",
                 cssVariable: "--font-cascadia-mono"
+            },
+            {
+                provider: fontProviders.google(),
+                name: "IBM Plex Mono",
+                cssVariable: "--font-ibm-plex-mono"
             }
         ]
     },

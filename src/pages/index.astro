@@ -22,10 +22,10 @@ const publications = (await getCollection('publications'))
 ---
 
 <Layout>
-  <div class="grid grid-cols-1 gap-x-4 lg:grid-cols-3 lg gap-x-8">
+  <div class="grid grid-cols-1 gap-x-4 lg:grid-cols-3 lg:gap-x-8">
     <div class="lg:col-span-2 flex flex-col justify-center">
       <div>
-        <span class='font-[400] text-2xl text-white'>
+        <span class='font-[400] text-2xl text-[var(--text)]'>
           Hey! I'm Mátyás
         </span>
         <span class='font-[400] text-xl'>
@@ -57,13 +57,13 @@ const publications = (await getCollection('publications'))
     </div>
   </div>
   <p class='pt-6 pb-3'>
-    <span class='text-xl text-white'>Updates</span>
+    <span class='text-xl text-[var(--text)]'>Updates</span>
     <ul>
       <li>
         <span class='font-mono'>[01/2026]:</span>
         I'll be visiting
         <Link href='https://www.mit.edu/' external>MIT</Link>
-        for 3 month starting April 2026 🚀
+        for 3 months starting April 2026 🚀
       </li>
       <li>
         <span class='font-mono'>[01/2026]:</span>
@@ -102,7 +102,7 @@ const publications = (await getCollection('publications'))
     </ul>
   </p>
   <p class='justify-between flex pt-6 pb-3'>
-    <span class='font-[500] text-xl text-white'>
+    <span class='font-[500] text-xl text-[var(--text)]'>
       Publications
     </span>
     <Link href='/publications'>

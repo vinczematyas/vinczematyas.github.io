@@ -9,8 +9,8 @@ authorAffiliations: ""
 authorAffiliationsMap: ""
 externalAffiliatedLinks: "Paper: https://arxiv.org/abs/2501.14249, Website: https://agi.safe.ai/"
 localAffiliatedLinks: ""
-conf: "prepring"
-confShort: "arxiv"
+conf: "preprint"
+confShort: "arXiv"
 date: 2025-04-29
 website: "https://arxiv.org/abs/2501.14249"
 draft: false

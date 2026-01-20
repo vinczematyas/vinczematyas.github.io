@@ -1,19 +1,55 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+:root {
+  color-scheme: dark;
+  --bg-outer: #00141d;
+  --bg: #01242e;
+  --bg-elevated: #0b3642;
+  --text: #dddddd;
+  --muted: #9fb7c4;
+  --border: #1d3a45;
+  --link: #8cc2dd;
+  --link-hover: #b8e6ff;
+}
+
+.theme-light {
+  color-scheme: light;
+  --bg-outer: #e7ecf6; /* white lilac */
+  --bg: #f4f6fb;
+  --bg-elevated: #ffffff;
+  --text: #303137; /* tuna */
+  --muted: #686a74; /* shuttle gray */
+  --border: #c3c8f5; /* moon raker */
+  --link: #6a7bef; /* cornflower blue */
+  --link-hover: #8693f2; /* portage */
+}
+
+html {
+  background-color: var(--bg-outer);
+}
 
 body {
   scroll-padding-top: 100px;
   overflow-y: auto;
-  @apply bg-[#01242e];
+  @apply bg-[var(--bg)] text-[var(--text)];
   @apply max-w-4xl mx-auto min-h-screen;
   @apply lg:px-15 md:px-15 px-5;
-  @apply text-[#dddddd];
 }
 
+a {
+  color: var(--link);
+}
+
+a:hover {
+  color: var(--link-hover);
+}
+
+p, span, li {
+  color: var(--text);
+}
 
 @theme {
-  --font-sans: var(--font-inter);
+  --font-sans: var(--font-ibm-plex-mono);
   --font-mono: var(--font-cascadia-mono);
 }
-

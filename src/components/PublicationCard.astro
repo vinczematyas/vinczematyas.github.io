@@ -45,7 +45,7 @@ if (publication.data.etal === true) {
 }
 ---
 
-<div class="grid grid-cols-1 gap-x-4 gap-y-2 lg:grid-cols-7 lg:gap-x-8 rounded-md border border-gray-600 p-4">
+<div class="grid grid-cols-1 gap-x-4 gap-y-2 lg:grid-cols-7 lg:gap-x-8 rounded-md border border-[var(--border)] p-4">
   <div class="hidden lg:col-span-2 lg:flex lg:items-center lg:justify-center">
     <Image
       src={publicationCardImage}
@@ -60,9 +60,10 @@ if (publication.data.etal === true) {
       {publication.data.title}
     </Link>
 
-    <div class="mt-1 flex flex-wrap gap-x-4 gap-y-1 items-center text-sm"> {authors} </div>
+     <div class="mt-1 flex flex-wrap gap-x-4 gap-y-1 items-center text-sm text-[var(--text)]"> {authors} </div>
 
-    <div class="mt-1 flex flex-wrap gap-x-4 gap-y-1 items-center text-sm">
+     <div class="mt-1 flex flex-wrap gap-x-4 gap-y-1 items-center text-sm text-[var(--muted)]">
+
       @ {publication.data.confShort}<span class="text-gray-400 text-sm">|</span>
 
       {externalAffiliatedLinks && externalAffiliatedLinks.length > 0 && (

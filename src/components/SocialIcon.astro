@@ -16,10 +16,21 @@ const { URL, icon, icon_size } = Astro.props;
   target={'_blank'}
   class={ mergeClassNames(
     `inline-block ${icon_size}`,
-    'hover:text-white',
-    'transition-colors duration-300 ease-in-out',
+    'social-link',
+    'transition-colors duration-100 ease-out',
+    'align-middle',
   )}
 >
   <i class={`bi bi-${icon}`}></i>
 </a>
+
+<style>
+  :global(.social-link) {
+    color: var(--text);
+  }
+  :global(.social-link:hover),
+  :global(.social-link:focus-visible) {
+    color: var(--link);
+  }
+</style>
 
