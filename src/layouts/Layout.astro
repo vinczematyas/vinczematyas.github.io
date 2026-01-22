@@ -10,20 +10,34 @@ import '@styles/global.css';
     <script is:inline>
       (() => {
         const root = document.documentElement;
-        const mql = window.matchMedia ? window.matchMedia("(prefers-color-scheme: light)") : null;
+        const storageKey = "preferred-color-scheme";
+        const prefersLight = window.matchMedia ? window.matchMedia("(prefers-color-scheme: light)") : null;
 
-        const applyTheme = (isLight) => {
+        const applyTheme = (theme) => {
+          const isLight = theme === "light";
           root.classList.toggle("theme-light", isLight);
           root.classList.toggle("theme-dark", !isLight);
           root.style.colorScheme = isLight ? "light" : "dark";
         };
 
-        const setFromSystem = () => applyTheme(mql?.matches ?? false);
-        setFromSystem();
+        const getStoredTheme = () => {
+          try {
+            return localStorage.getItem(storageKey);
+          } catch {
+            return null;
+          }
+        };
 
-        mql?.addEventListener?.("change", (event) => {
-          // Always follow system; no stored overrides
-          applyTheme(event.matches);
+        const storedTheme = getStoredTheme();
+        if (storedTheme === "light" || storedTheme === "dark") {
+          applyTheme(storedTheme);
+        } else {
+          applyTheme(prefersLight && prefersLight.matches ? "light" : "dark");
+        }
+
+        prefersLight?.addEventListener?.("change", (event) => {
+          if (getStoredTheme()) return;
+          applyTheme(event.matches ? "light" : "dark");
         });
       })();
     </script>

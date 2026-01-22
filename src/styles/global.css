@@ -7,22 +7,20 @@
   --bg: #01242e;
   --bg-elevated: #0b3642;
   --text: #dddddd;
-  --muted: #9fb7c4;
-  --border: #1d3a45;
+  --border: #8cc2dd;
   --link: #8cc2dd;
   --link-hover: #b8e6ff;
 }
 
 .theme-light {
   color-scheme: light;
-  --bg-outer: #e7ecf6; /* white lilac */
+  --bg-outer: #e7ecf6;
   --bg: #f4f6fb;
   --bg-elevated: #ffffff;
-  --text: #303137; /* tuna */
-  --muted: #686a74; /* shuttle gray */
-  --border: #c3c8f5; /* moon raker */
-  --link: #6a7bef; /* cornflower blue */
-  --link-hover: #8693f2; /* portage */
+  --text: #444444;
+  --border: #3273dc;
+  --link: #3273dc;
+  --link-hover: #1c50a4;
 }
 
 html {
