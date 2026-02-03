@@ -4,6 +4,7 @@ mainTitlePart: "SMoSE: Sparse Mixture of Shallow Experts"
 secondaryTitlePart: "for Interpretable Reinforcement Learning in Continuous Control Tasks"
 authors: "Mátyás Vincze, Laura Ferrarotti, Leonardo Lucio Custode, Bruno Lepri, Giovanni Iacca"
 etal: false
+trim_names: true
 authorLinks: "https://vinczematyas.github.io/, https://scholar.google.com/citations?user=mBp8qBAAAAAJ&hl=en/, https://scholar.google.com/citations?user=3qvS-AwAAAAJ&hl=en/, https://scholar.google.com/citations?user=JfcopG0AAAAJ&hl=en/, https://sites.google.com/site/giovanniiacca/"
 authorAffiliations: "University of Trento, Fondazione Bruno Kessler"
 authorAffiliationsMap: "1, 2; 2; 1; 2; 1"

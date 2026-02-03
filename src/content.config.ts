@@ -9,6 +9,7 @@ const publications = defineCollection({
         secondaryTitlePart: z.string(),
         authors: z.string(),
         etal: z.boolean(),
+        trim_names: z.boolean(),
         authorLinks: z.string(),
         authorAffiliations: z.string(),
         authorAffiliationsMap: z.string(),

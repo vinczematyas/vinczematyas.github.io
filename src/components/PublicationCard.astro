@@ -30,15 +30,19 @@ const localAffiliatedLinks = publication.data.localAffiliatedLinks
     return { name, url };
 });
 
-let authors = publication.data.authors
-  .split(", ")
-  .map((author) => {
-    const nameParts = author.split(" ");
-    const lastName = nameParts.pop();
-    const initials = nameParts.map( part => part.charAt(0) + ".").join(" ");
-    return `${initials} ${lastName}`
-  })
+if (publication.data.trim_names == true) {
+  var authors = publication.data.authors
+    .split(", ")
+    .map((author) => {
+      const nameParts = author.split(" ");
+      const lastName = nameParts.pop();
+      const initials = nameParts.map( part => part.charAt(0) + ".").join(" ");
+      return `${initials} ${lastName}`
+    })
   .join(", ")
+} else {
+  var authors = publication.data.authors
+}
 
 if (publication.data.etal === true) {
   authors = authors + ", et al."
