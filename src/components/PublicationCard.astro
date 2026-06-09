@@ -1,12 +1,17 @@
 ---
+import type { ImageMetadata } from "astro";
+import type { CollectionEntry } from "astro:content";
 import Link from "@components/Link.astro";
 import { Image } from "astro:assets";
 
-export interface Props { publication, publicationCardImage }
+type Props = {
+  publication: CollectionEntry<"publications">;
+  publicationCardImage: ImageMetadata;
+};
 
 const { publication, publicationCardImage } = Astro.props as Props;
 
-let websitePath;
+let websitePath: string;
 let isLocal = false;
 if (publication.data.website !== "local") {
   websitePath = publication.data.website;
@@ -18,38 +23,39 @@ if (publication.data.website !== "local") {
 
 const externalAffiliatedLinks = publication.data.externalAffiliatedLinks
   .split(", ")
-  .map((link) => {
+  .map((link: string) => {
     const [name, url] = link.split(": ");
     return { name, url };
   });
 
 const localAffiliatedLinks = publication.data.localAffiliatedLinks
   .split(", ")
-  .map((link) => {
+  .map((link: string) => {
     const [name, url] = link.split(": ");
     return { name, url };
-});
+  });
 
+let authors: string;
 if (publication.data.trim_names == true) {
-  var authors = publication.data.authors
+  authors = publication.data.authors
     .split(", ")
-    .map((author) => {
+    .map((author: string) => {
       const nameParts = author.split(" ");
       const lastName = nameParts.pop();
-      const initials = nameParts.map( part => part.charAt(0) + ".").join(" ");
-      return `${initials} ${lastName}`
+      const initials = nameParts.map((part: string) => part.charAt(0) + ".").join(" ");
+      return `${initials} ${lastName}`;
     })
-  .join(", ")
+    .join(", ");
 } else {
-  var authors = publication.data.authors
+  authors = publication.data.authors;
 }
 
 if (publication.data.etal === true) {
-  authors = authors + ", et al."
+  authors = `${authors}, et al.`;
 }
 ---
 
-<div class="grid grid-cols-1 gap-x-4 gap-y-2 lg:grid-cols-7 lg:gap-x-8 rounded-md border border-[var(--border)]/50 p-4">
+<div class="grid grid-cols-1 gap-x-4 gap-y-2 rounded-md border border-[var(--border-soft)] bg-[var(--surface)] p-4 shadow-[0_1px_0_rgba(0,0,0,0.04)] transition-[background-color,border-color,box-shadow] duration-200 ease-out hover:border-[var(--border)] hover:bg-[var(--surface-elevated)] hover:shadow-md lg:grid-cols-7 lg:gap-x-8">
   <div class="hidden lg:col-span-2 lg:flex lg:items-center lg:justify-center">
     <Image
       src={publicationCardImage}
@@ -59,20 +65,22 @@ if (publication.data.etal === true) {
     />
   </div>
 
-  <div class="lg:col-span-5 flex flex-col justify-center">
-   <Link href={websitePath} class="mb-2 md:mb-3 block" external={isLocal !== true}> 
+  <div class="flex flex-col justify-center lg:col-span-5">
+    <Link href={websitePath} class="mb-2 block md:mb-3" external={isLocal !== true}>
       {publication.data.title}
     </Link>
 
-     <div class="mt-1 flex flex-wrap gap-x-4 gap-y-1 items-center text-sm text-[var(--text)]"> {authors} </div>
+    <div class="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-[var(--muted)]">
+      {authors}
+    </div>
 
-     <div class="mt-1 flex flex-wrap gap-x-4 gap-y-1 items-center text-sm text-[var(--text)]">
-
-      @ {publication.data.confShort}<span class="text-gray-400 text-sm">|</span>
+    <div class="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-[var(--muted)]">
+      @ {publication.data.confShort}
+      <span class="text-[var(--muted)] text-sm" aria-hidden="true">|</span>
 
       {externalAffiliatedLinks && externalAffiliatedLinks.length > 0 && (
         <ul class="flex flex-wrap gap-x-3 gap-y-1">
-          {externalAffiliatedLinks.map((link, index) => (
+          {externalAffiliatedLinks.map((link: { name: string; url: string }) => (
             <li>
               <Link href={link.url} external>
                 {link.name}
@@ -84,7 +92,7 @@ if (publication.data.etal === true) {
 
       {localAffiliatedLinks && localAffiliatedLinks.length > 0 && (
         <ul class="flex flex-wrap gap-x-3 gap-y-1">
-          {localAffiliatedLinks.map((link, index) => (
+          {localAffiliatedLinks.map((link: { name: string; url: string }) => (
             <li>
               <Link href={`/publications/${publication.id}/${link.url}`} external>
                 {link.name}
@@ -96,4 +104,3 @@ if (publication.data.etal === true) {
     </div>
   </div>
 </div>
-

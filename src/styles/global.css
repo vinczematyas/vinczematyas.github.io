@@ -3,24 +3,38 @@
 
 :root {
   color-scheme: dark;
-  --bg-outer: #00141d;
-  --bg: #01242e;
-  --bg-elevated: #0b3642;
-  --text: #dddddd;
-  --border: #8cc2dd;
-  --link: #8cc2dd;
-  --link-hover: #b8e6ff;
+  --bg-outer: #2c2824;
+  --bg: #211e1b;
+  --bg-elevated: #2c2824;
+  --surface: #26211e;
+  --surface-elevated: #2b2622;
+  --text: #cbc4bf;
+  --text-muted: #9f9690;
+  --muted: var(--text-muted);
+  --border: #4a4038;
+  --border-soft: #3a322c;
+  --link: #d19f7b;
+  --link-hover: #e2b69a;
+  --image-filter: brightness(0.78);
+  --image-filter-hover: brightness(1);
 }
 
 .theme-light {
   color-scheme: light;
-  --bg-outer: #e7ecf6;
-  --bg: #f4f6fb;
+  --bg-outer: #f2f1ee;
+  --bg: #fbfbfb;
   --bg-elevated: #ffffff;
-  --text: #444444;
-  --border: #3273dc;
-  --link: #3273dc;
-  --link-hover: #1c50a4;
+  --surface: #f8f7f5;
+  --surface-elevated: #ffffff;
+  --text: #2e2e2e;
+  --text-muted: #6f6a66;
+  --muted: var(--text-muted);
+  --border: #e2d9d3;
+  --border-soft: #ece4df;
+  --link: #d65c5c;
+  --link-hover: #b94747;
+  --image-filter: brightness(0.99) saturate(0.98);
+  --image-filter-hover: brightness(1) saturate(1);
 }
 
 html {
@@ -43,8 +57,39 @@ a:hover {
   color: var(--link-hover);
 }
 
+a:focus-visible {
+  color: var(--link-hover);
+  outline: none;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 p, span, li {
   color: var(--text);
+}
+
+.theme-dark img:not(.no-dim-image),
+.theme-light img:not(.no-dim-image) {
+  filter: var(--image-filter);
+  transition: filter 180ms ease, transform 180ms ease;
+}
+
+.theme-dark img:not(.no-dim-image):hover,
+.theme-dark img:not(.no-dim-image):focus-visible,
+.theme-dark a:hover img:not(.no-dim-image),
+.theme-dark a:focus-visible img:not(.no-dim-image),
+.theme-light img:not(.no-dim-image):hover,
+.theme-light img:not(.no-dim-image):focus-visible,
+.theme-light a:hover img:not(.no-dim-image),
+.theme-light a:focus-visible img:not(.no-dim-image) {
+  filter: var(--image-filter-hover);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-dark img:not(.no-dim-image),
+  .theme-light img:not(.no-dim-image) {
+    transition: none;
+  }
 }
 
 @theme {
