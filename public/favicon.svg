@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 64 64"
+     role="img"
+     aria-labelledby="title">
+  <title id="title">Recursive dragon curve favicon</title>
+  <style>
+    .frame {
+      fill: #211e1b;
+      stroke: #4a4038;
+    }
+    .start { stop-color: #d19f7b; }
+    .end   { stop-color: #e2b69a; }
+    @media (prefers-color-scheme: light) {
+      .frame {
+        fill: #fbfbfb;
+        stroke: #e2d9d3;
+      }
+      .start { stop-color: #d65c5c; }
+      .end   { stop-color: #b94747; }
+    }
+  </style>
+  <defs>
+    <linearGradient id="curve" x1="0" y1="1" x2="1" y2="0">
+      <stop class="start" offset="0"/>
+      <stop class="end" offset="1"/>
+    </linearGradient>
+  </defs>
+  <rect class="frame"
+        x="1.5" y="1.5" width="61" height="61" rx="14"
+        stroke-width="1.75"/>
+  <polyline points="20.000,41.000 14.000,47.000 20.000,53.000 26.000,47.000 32.000,53.000 38.000,47.000 32.000,41.000 38.000,35.000 44.000,41.000 50.000,35.000 44.000,29.000 38.000,35.000 32.000,29.000 38.000,23.000 32.000,17.000 38.000,11.000 44.000,17.000"
+            fill="none"
+            stroke="url(#curve)"
+            stroke-width="4.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"/>
+</svg>
