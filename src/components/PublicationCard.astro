@@ -1,15 +1,25 @@
 ---
-import type { ImageMetadata } from "astro";
 import type { CollectionEntry } from "astro:content";
 import Link from "@components/Link.astro";
-import { Image } from "astro:assets";
 
 type Props = {
   publication: CollectionEntry<"publications">;
-  publicationCardImage: ImageMetadata;
 };
 
-const { publication, publicationCardImage } = Astro.props as Props;
+const { publication } = Astro.props as Props;
+
+interface AffiliatedLink {
+  name: string;
+  url: string;
+}
+
+const parseAffiliatedLinks = (links: string): AffiliatedLink[] => links
+  .split(", ")
+  .map((link: string) => {
+    const [name, url] = link.split(": ");
+    return { name, url };
+  })
+  .filter((link): link is AffiliatedLink => Boolean(link.name && link.url));
 
 let websitePath: string;
 let isLocal = false;
@@ -21,19 +31,8 @@ if (publication.data.website !== "local") {
   isLocal = true;
 }
 
-const externalAffiliatedLinks = publication.data.externalAffiliatedLinks
-  .split(", ")
-  .map((link: string) => {
-    const [name, url] = link.split(": ");
-    return { name, url };
-  });
-
-const localAffiliatedLinks = publication.data.localAffiliatedLinks
-  .split(", ")
-  .map((link: string) => {
-    const [name, url] = link.split(": ");
-    return { name, url };
-  });
+const externalAffiliatedLinks = parseAffiliatedLinks(publication.data.externalAffiliatedLinks);
+const localAffiliatedLinks = parseAffiliatedLinks(publication.data.localAffiliatedLinks);
 
 let authors: string;
 if (publication.data.trim_names == true) {
@@ -55,27 +54,22 @@ if (publication.data.etal === true) {
 }
 ---
 
-<div class="grid grid-cols-1 gap-x-4 gap-y-2 rounded-md border border-[var(--border-soft)] bg-[var(--surface)] p-4 shadow-[0_1px_0_rgba(0,0,0,0.04)] transition-[background-color,border-color,box-shadow] duration-200 ease-out hover:border-[var(--border)] hover:bg-[var(--surface-elevated)] hover:shadow-md lg:grid-cols-7 lg:gap-x-8">
-  <div class="hidden lg:col-span-2 lg:flex lg:items-center lg:justify-center">
-    <Image
-      src={publicationCardImage}
-      alt={publication.data.title}
-      class="rounded-md object-cover"
-      loading="eager"
-    />
-  </div>
-
-  <div class="flex flex-col justify-center lg:col-span-5">
-    <Link href={websitePath} class="mb-2 block md:mb-3" external={isLocal !== true}>
+<div class="border-t border-[var(--border-soft)] py-3 transition-[border-color,background-color] duration-200 ease-out hover:border-[var(--border)]">
+  <div class="flex flex-col justify-center">
+    <Link href={websitePath} class="mb-1.5 block md:mb-2" external={isLocal !== true}>
       {publication.data.title}
     </Link>
 
-    <div class="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-[var(--muted)]">
+    <div class="mt-0.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-[var(--muted)]">
       {authors}
     </div>
 
-    <div class="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-[var(--muted)]">
-      @ {publication.data.confShort}
+    <div class="mt-1 text-sm leading-5 text-[var(--muted)]">
+      {publication.data.summary}
+    </div>
+
+    <div class="mt-0.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-[var(--muted)]">
+      @ {publication.data.confShort} · {publication.data.date.getFullYear()}
       <span class="text-[var(--muted)] text-sm" aria-hidden="true">|</span>
 
       {externalAffiliatedLinks && externalAffiliatedLinks.length > 0 && (

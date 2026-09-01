@@ -5,18 +5,18 @@
   <title id="title">Recursive dragon curve favicon</title>
   <style>
     .frame {
-      fill: #211e1b;
-      stroke: #4a4038;
+      fill: #1f1f28;
+      stroke: #54546d;
     }
-    .start { stop-color: #d19f7b; }
-    .end   { stop-color: #e2b69a; }
+    .start { stop-color: #7fb4ca; }
+    .end   { stop-color: #a3d4d5; }
     @media (prefers-color-scheme: light) {
       .frame {
-        fill: #fbfbfb;
-        stroke: #e2d9d3;
+        fill: #e8ebf1;
+        stroke: #8f99aa;
       }
-      .start { stop-color: #d65c5c; }
-      .end   { stop-color: #b94747; }
+      .start { stop-color: #3d6784; }
+      .end   { stop-color: #2f506a; }
     }
   </style>
   <defs>

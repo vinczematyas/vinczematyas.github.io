@@ -1,20 +1,12 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import Link from '@components/Link.astro';
-import SocialIcons from '@components/SocialIcons.astro';
 import PublicationCard from '@components/PublicationCard.astro';
 
 import { Image } from "astro:assets";
 import { getCollection } from 'astro:content';
 
 import profilePic from '@content/profile_pics.jpg';
-import smose from '@content/publications/smose/smose.png';
-import lastexam from '@content/publications/lastexam/lastexam.png';
-
-const publicationImages: Record<string, typeof lastexam> = {
-  lastexam: lastexam,
-  smose: smose
-};
 
 const publications = (await getCollection('publications'))
   .filter((publication) => publication.data.draft !== true)
@@ -22,105 +14,140 @@ const publications = (await getCollection('publications'))
 ---
 
 <Layout>
-  <div class="grid grid-cols-1 gap-x-4 lg:grid-cols-3 lg:gap-x-8">
-    <div class="lg:col-span-2 flex flex-col justify-center">
-      <div>
-        <span class='font-[400] text-2xl text-[var(--text)]'>
-          Hey! I'm Mátyás
-        </span>
-        <span class='font-[400] text-xl'>
-          <Link href='https://ipa-reader.com/?text=%CB%88ma%CB%90ca%CB%90%CA%83' class="text-xl" external>
-            [ˈmaːcaːʃ]
-          </Link>
-        </span>
-      </div>
-      <span class='font-[400] pt-4 pb-4'>
-        I'm a second-year PhD student in Machine Learning at the
+  <section class="flow-root leading-6 text-[var(--text)]">
+    <Image
+      src={profilePic}
+      alt="Portrait of Mátyás Vincze"
+      width={192}
+      height={192}
+      densities={[1, 2]}
+      class="no-dim-image hidden h-48 w-48 rounded-md object-cover lg:float-right lg:mb-4 lg:ml-8 lg:block"
+    />
+
+    <div class="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+      <h1 class='font-[500] text-3xl text-[var(--text)]'>
+        Mátyás Vincze
+      </h1>
+      <Link
+        href='https://ipa-reader.com/?text=%CB%88ma%CB%90ca%CB%90%CA%83'
+        class='text-sm text-[var(--muted)] hover:text-[var(--link-hover)] focus-visible:text-[var(--link-hover)]'
+        external
+      >
+        [ˈmaːcaːʃ]
+      </Link>
+    </div>
+
+    <p class="mt-2 font-mono text-sm text-[var(--muted)]">
+      PhD researcher / language agents / reinforcement learning
+    </p>
+
+    <div class="mt-3 space-y-2.5">
+      <p>
+        I am a PhD researcher at the
         <Link href='https://www.unitn.it/en' external>University of Trento</Link>,
-        and
-        <Link href='https://www.fbk.eu/en' external>Fondazione Bruno Kessler</Link>.
-        Supervised by 
+        conducting research at
+        <Link href='https://www.fbk.eu/en' external>Fondazione Bruno Kessler</Link>
+        with
         <Link href='https://scholar.google.it/citations?user=JfcopG0AAAAJ&hl=en' external>Bruno Lepri</Link>
         and
-        <Link href='https://sites.google.com/site/giovanniiacca/' external>Giovanni Iacca</Link>,
-        I work on modularity and mixtures-of-mixtures.
-        I deeply care about developing AI that is transparent and accessible for the masses beyond the hype.
-      </span>
-      <SocialIcons icon_size={'text-2xl'}/>
+        <Link href='https://sites.google.com/site/giovanniiacca/' external>Giovanni Iacca</Link>.
+        I am currently visiting
+        <Link href='https://miba.dev/' external>Michiel Bakker</Link>'s group at
+        <Link href='https://www.mit.edu/' external>MIT</Link>.
+      </p>
+      <p>
+        I work on post-training for long-horizon language agents, combining distillation,
+        multi-agent feedback, and reinforcement learning with verifiable rewards. My
+        earlier work on interpretable reinforcement learning led to
+        <Link href='https://doi.org/10.1609/aaai.v39i20.35394' external>SMoSE</Link>, a
+        sparse mixture of shallow policy experts.
+      </p>
     </div>
-    <div class="hidden lg:col-span-1 lg:flex lg:items-center lg:justify-center">
-      <Image
-        src={profilePic}
-        alt=""
-        class="no-dim-image rounded-md object-cover"
-      />
-    </div>
-  </div>
-  <p class='pt-6 pb-3'>
-    <span class='text-xl text-[var(--text)]'>Updates</span>
-    <ul>
-      <li>
-        <span class='font-mono'>[05/26]:</span>
-        Visiting
-        <Link href='https://miba.dev/' external>Michiel Bakker</Link>'s group in
-        <Link href='https://www.mit.edu/' external>MIT</Link>
-        🚀
+  </section>
+
+  <section class='pt-7' aria-labelledby='updates-heading'>
+    <h2 id='updates-heading' class='mb-2 font-[500] text-xl text-[var(--text)]'>
+      Updates
+    </h2>
+    <ul class='not-prose space-y-1.5 sm:space-y-0.5'>
+      <li class='grid grid-cols-[3.5rem_minmax(0,1fr)] gap-x-2 sm:grid-cols-[4.3rem_minmax(0,1fr)]'>
+        <time datetime='2026-05' aria-label='May 2026' class='whitespace-nowrap font-mono text-xs leading-5 text-[var(--muted)] sm:text-sm sm:leading-5.5'>[05/26]</time>
+        <span class='min-w-0 text-sm leading-5 sm:text-base sm:leading-5.5'>
+          Visiting
+          <Link href='https://miba.dev/' external>Michiel Bakker</Link>'s group at
+          <Link href='https://www.mit.edu/' external>MIT</Link>
+          to work on post-training for long-horizon language agents 🚀
+        </span>
       </li>
-      <li>
-        <span class='font-mono'>[02/26]:</span>
-        ISCRA project accepted at
-        <Link href='https://www.cineca.it/en#paragraph-id--217' external>CINECA</Link>
-        (A100s go brrr)
+      <li class='grid grid-cols-[3.5rem_minmax(0,1fr)] gap-x-2 sm:grid-cols-[4.3rem_minmax(0,1fr)]'>
+        <time datetime='2026-02' aria-label='February 2026' class='whitespace-nowrap font-mono text-xs leading-5 text-[var(--muted)] sm:text-sm sm:leading-5.5'>[02/26]</time>
+        <span class='min-w-0 text-sm leading-5 sm:text-base sm:leading-5.5'>
+          Another ISCRA project accepted at
+          <Link href='https://www.cineca.it/en#paragraph-id--217' external>CINECA</Link>
+          (A100s go brrr).
+        </span>
       </li>
-      <li>
-        <span class='font-mono'>[01/26]:</span>
-        Driving license secured ✅
+      <li class='grid grid-cols-[3.5rem_minmax(0,1fr)] gap-x-2 sm:grid-cols-[4.3rem_minmax(0,1fr)]'>
+        <time datetime='2026-01' aria-label='January 2026' class='whitespace-nowrap font-mono text-xs leading-5 text-[var(--muted)] sm:text-sm sm:leading-5.5'>[01/26]</time>
+        <span class='min-w-0 text-sm leading-5 sm:text-base sm:leading-5.5'>Driving license secured ✅</span>
       </li>
-      <li>
-        <span class='font-mono'>[05/25]:</span>
-        ISCRA project accepted at
-        <Link href='https://www.cineca.it/en#paragraph-id--217' external>CINECA</Link>
-        (A100s go brrr)
+      <li class='grid grid-cols-[3.5rem_minmax(0,1fr)] gap-x-2 sm:grid-cols-[4.3rem_minmax(0,1fr)]'>
+        <time datetime='2025-05' aria-label='May 2025' class='whitespace-nowrap font-mono text-xs leading-5 text-[var(--muted)] sm:text-sm sm:leading-5.5'>[05/25]</time>
+        <span class='min-w-0 text-sm leading-5 sm:text-base sm:leading-5.5'>
+          ISCRA project accepted at
+          <Link href='https://www.cineca.it/en#paragraph-id--217' external>CINECA</Link>
+          (A100s go brrr, again).
+        </span>
       </li>
-      <li>
-        <span class='font-mono'>[03/25]:</span>
-        Attended
-        <Link href='http://alps-2025.imag.fr/index.php/speakers/index.html' external>ALPS 2025</Link>
-        winter school in Aussois, France
+      <li class='grid grid-cols-[3.5rem_minmax(0,1fr)] gap-x-2 sm:grid-cols-[4.3rem_minmax(0,1fr)]'>
+        <time datetime='2025-03' aria-label='March 2025' class='whitespace-nowrap font-mono text-xs leading-5 text-[var(--muted)] sm:text-sm sm:leading-5.5'>[03/25]</time>
+        <span class='min-w-0 text-sm leading-5 sm:text-base sm:leading-5.5'>
+          Attended the
+          <Link href='http://alps-2025.imag.fr/index.php/speakers/index.html' external>ALPS 2025</Link>
+          winter school in Aussois, France.
+        </span>
       </li>
-      <li>
-        <span class='font-mono'>[02/25]:</span>
-        Attended
-        <Link href='https://aaai.org/conference/aaai/aaai-25/' external>AAAI 2025</Link>
-        conference in Philadelphia, USA
+      <li class='grid grid-cols-[3.5rem_minmax(0,1fr)] gap-x-2 sm:grid-cols-[4.3rem_minmax(0,1fr)]'>
+        <time datetime='2025-02' aria-label='February 2025' class='whitespace-nowrap font-mono text-xs leading-5 text-[var(--muted)] sm:text-sm sm:leading-5.5'>[02/25]</time>
+        <span class='min-w-0 text-sm leading-5 sm:text-base sm:leading-5.5'>
+          Presented SMoSE at
+          <Link href='https://aaai.org/conference/aaai/aaai-25/' external>AAAI 2025</Link>
+          in Philadelphia.
+        </span>
       </li>
-      <li>
-        <span class='font-mono'>[12/24]:</span>
-        Paper accepted at
-        <Link href='https://aaai.org/conference/aaai/aaai-25/' external>AAAI 2025</Link>
-        conference
+      <li class='grid grid-cols-[3.5rem_minmax(0,1fr)] gap-x-2 sm:grid-cols-[4.3rem_minmax(0,1fr)]'>
+        <time datetime='2024-12' aria-label='December 2024' class='whitespace-nowrap font-mono text-xs leading-5 text-[var(--muted)] sm:text-sm sm:leading-5.5'>[12/24]</time>
+        <span class='min-w-0 text-sm leading-5 sm:text-base sm:leading-5.5'>
+          SMoSE accepted to
+          <Link href='https://aaai.org/conference/aaai/aaai-25/' external>AAAI 2025</Link>.
+        </span>
       </li>
-      <li>
-        <span class='font-mono'>[07/24]:</span>
-        Got 1st place at the
-        <Link href='https://medvet.inginf.units.it/publications/2024-o-nrwm-interpretable/' external>Interpretable Control Competition</Link>
-        - Gecco 2024
+      <li class='grid grid-cols-[3.5rem_minmax(0,1fr)] gap-x-2 sm:grid-cols-[4.3rem_minmax(0,1fr)]'>
+        <time datetime='2024-07' aria-label='July 2024' class='whitespace-nowrap font-mono text-xs leading-5 text-[var(--muted)] sm:text-sm sm:leading-5.5'>[07/24]</time>
+        <span class='min-w-0 text-sm leading-5 sm:text-base sm:leading-5.5'>
+          Placed 1st in the
+          <Link href='https://medvet.inginf.units.it/publications/2024-o-nrwm-interpretable/' external>Interpretable Control Competition</Link>
+          at GECCO 2024.
+        </span>
       </li>
     </ul>
-  </p>
-  <p class='justify-between flex pt-6 pb-3'>
-    <span class='font-[500] text-xl text-[var(--text)]'>
-      Publications
-    </span>
-    <Link href='/publications'>
-      see all
-    </Link>
-  </p>
-  <ul class='not-prose flex flex-col gap-3'>
-    {publications.map((publication) => (
-      <li>
-        <PublicationCard publication={publication} publicationCardImage={publicationImages[publication.id]} />
-      </li>
-    ))}
-  </ul>
+  </section>
+
+  <section class="pt-7" aria-labelledby="publications-heading">
+    <div class='flex items-baseline justify-between pb-2'>
+      <h2 id="publications-heading" class='font-[500] text-xl text-[var(--text)]'>
+        Publications
+      </h2>
+      <Link href='/publications'>
+        see all
+      </Link>
+    </div>
+    <ul class='not-prose'>
+      {publications.map((publication) => (
+        <li>
+          <PublicationCard publication={publication} />
+        </li>
+      ))}
+    </ul>
+  </section>
 </Layout>

@@ -5,11 +5,11 @@
   <title id="title">Recursive dragon curve favicon</title>
   <style>
     .frame {
-      fill: #211e1b;
-      stroke: #4a4038;
+      fill: #1f1f28;
+      stroke: #54546d;
     }
-    .start { stop-color: #d19f7b; }
-    .end   { stop-color: #e2b69a; }
+    .start { stop-color: #7fb4ca; }
+    .end   { stop-color: #a3d4d5; }
   </style>
   <defs>
     <linearGradient id="curve" x1="0" y1="1" x2="1" y2="0">

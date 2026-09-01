@@ -3,11 +3,11 @@ import { mergeClassNames } from "../utils.ts";
 ---
 <article
   class={mergeClassNames(
-    "mx-auto max-w-screen-md",
+    "mx-auto max-w-4xl",
     "prose",
     "prose-headings:mt-3 prose-headings:mb-2 prose-p:m-0",
     "prose-h1:font-bold prose-h1:text-2xl",
-    "prose-p:text-base/5.5",
+    "prose-p:text-base/5",
     "prose-img:rounded-xl",
     "prose-hr:my-6",
   )}>
@@ -15,8 +15,15 @@ import { mergeClassNames } from "../utils.ts";
 </article>
 
 <style>
-  :global(.prose) {
+  :global(.prose.prose) {
     color: var(--text);
+    --tw-prose-body: var(--text);
+    --tw-prose-headings: var(--text);
+    --tw-prose-links: var(--link);
+    --tw-prose-bold: var(--strong);
+    --tw-prose-code: var(--code-inline-text);
+    --tw-prose-pre-code: var(--code-block-text);
+    --tw-prose-pre-bg: var(--code-block-bg);
   }
   :global(.prose h1),
   :global(.prose h2),
@@ -39,5 +46,75 @@ import { mergeClassNames } from "../utils.ts";
     border-left-color: var(--border);
     color: var(--muted);
   }
+  :global(.prose strong),
+  :global(.prose b) {
+    color: var(--strong);
+    font-weight: 700;
+  }
+  :global(.prose a strong),
+  :global(.prose a b) {
+    color: inherit;
+  }
+  :global(.prose.prose :where(code):not(:where(pre code, pre code *))) {
+    border: 1px solid var(--border-soft);
+    border-radius: 0.25rem;
+    background-color: var(--code-inline-bg);
+    color: var(--code-inline-text);
+    font-family: var(--font-mono);
+    font-weight: 400;
+    padding: 0.08rem 0.28rem;
+  }
+  :global(.prose.prose :where(code):not(:where(pre code, pre code *))::before),
+  :global(.prose.prose :where(code):not(:where(pre code, pre code *))::after) {
+    content: none;
+  }
+  :global(.prose.prose :where(pre)) {
+    border: 1px solid var(--code-border);
+    background-color: var(--code-block-bg);
+    color: var(--code-block-text);
+  }
+  :global(.prose.prose :where(pre code)) {
+    border: 0;
+    background-color: transparent;
+    color: inherit;
+    padding: 0;
+  }
+  :global(.prose.prose :where(pre span)) {
+    color: inherit;
+  }
+  :global(.prose table) {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    border-collapse: collapse;
+    font-size: 0.86rem;
+    line-height: 1.35;
+    white-space: nowrap;
+  }
+  :global(.prose thead) {
+    border-bottom: 1px solid var(--border);
+  }
+  :global(.prose th) {
+    color: var(--strong);
+    font-weight: 600;
+  }
+  :global(.prose th),
+  :global(.prose td) {
+    border-bottom: 1px solid var(--border-soft);
+    padding: 0.45rem 0.75rem 0.45rem 0;
+    vertical-align: top;
+  }
+  :global(.prose tbody tr:last-child td) {
+    border-bottom: 0;
+  }
+  :global(.prose mark) {
+    border-radius: 0.2rem;
+    background-color: color-mix(in srgb, var(--link) 28%, transparent);
+    color: var(--text);
+    padding: 0.02rem 0.2rem;
+  }
+  :global(.prose ::selection) {
+    background-color: color-mix(in srgb, var(--link) 40%, transparent);
+    color: var(--text);
+  }
 </style>
-

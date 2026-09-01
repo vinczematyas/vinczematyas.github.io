@@ -7,8 +7,8 @@ import TableOfContents from '@components/TableOfContents.astro';
 
 export async function getStaticPaths() {
   const publications = (await getCollection("publications"))
-    .filter((publication) => !publication.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+    .filter((publication) => !publication.data.draft && publication.data.website === "local")
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
   return publications.map((publication) => ({
     params: { slug: publication.id },
     props: publication,
@@ -18,34 +18,40 @@ type Props = CollectionEntry<"publications">;
 
 const publication = Astro.props;
 
-const mainTitlePart = publication.data.mainTitlePart;
-const secondaryTitlePart = publication.data.secondaryTitlePart;
 const authors = publication.data.authors.split(', ');
 const authorLinks = publication.data.authorLinks.split(', ');
 const authorAffiliations = publication.data.authorAffiliations.split(', ');
 const authorAffiliationsMap = publication.data.authorAffiliationsMap.split('; ');
-const externalAffiliatedLinks = publication.data.externalAffiliatedLinks
-  .split(", ")
-  .map((link) => {
-    const [name, url] = link.split(": ");
-    return { name, url };
-  });
 
-const localAffiliatedLinks = publication.data.localAffiliatedLinks
+interface AffiliatedLink {
+  name: string;
+  url: string;
+}
+
+const parseAffiliatedLinks = (links: string): AffiliatedLink[] => links
   .split(", ")
   .map((link) => {
     const [name, url] = link.split(": ");
     return { name, url };
-});
+  })
+  .filter((link): link is AffiliatedLink => Boolean(link.name && link.url));
+
+const externalAffiliatedLinks = parseAffiliatedLinks(publication.data.externalAffiliatedLinks);
+const localAffiliatedLinks = parseAffiliatedLinks(publication.data.localAffiliatedLinks);
 
 const { Content, headings } = await render(publication);
 ---
 
-<Layout>
-  <p class="text-3xl text-[var(--text)] font-semibold text-center mt-2">{publication.data.mainTitlePart}</p>
-  <p class="text-3xl text-center text-[var(--text)]">{publication.data.secondaryTitlePart}</p>
+<Layout
+  title={publication.data.title}
+  description={`${publication.data.title}, published in ${publication.data.confShort} ${publication.data.date.getFullYear()}.`}
+>
+  <h1 class="mt-2 text-center text-3xl text-[var(--text)]">
+    <span class="block font-semibold">{publication.data.mainTitlePart}</span>
+    <span class="block">{publication.data.secondaryTitlePart}</span>
+  </h1>
   <div class="flex gap-x-2 flex-wrap text-lg text-[var(--text)] mt-5 justify-center">
-    { authors.map((name, index, arr) => (
+    { authors.map((name, index) => (
       <p>
         <Link href=`${authorLinks[index]}` external>{name}</Link><sup> {authorAffiliationsMap[index]}</sup>
       </p>
@@ -73,4 +79,3 @@ const { Content, headings } = await render(publication);
     <Content />
   </Prose>
 </Layout>
-

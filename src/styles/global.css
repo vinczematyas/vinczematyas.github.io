@@ -1,52 +1,147 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url("/fonts/atkinson-hyperlegible-latin-ext-400-normal.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url("/fonts/atkinson-hyperlegible-latin-400-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url("/fonts/atkinson-hyperlegible-latin-ext-700-normal.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url("/fonts/atkinson-hyperlegible-latin-700-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Lyth Mono Web";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url("/fonts/lythmono-regular-subset.woff2") format("woff2");
+  unicode-range: U+0020-007E, U+00A0-00FF, U+0283-0295, U+02C8, U+02D0, U+1D25, U+2010-2014, U+2018-201F, U+2022, U+2026, U+2032-2033, U+20AC;
+}
+
+@font-face {
+  font-family: "Lyth Mono Web";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 500;
+  src: url("/fonts/lythmono-medium-subset.woff2") format("woff2");
+  unicode-range: U+0020-007E, U+00A0-00FF, U+0283-0295, U+02C8, U+02D0, U+1D25, U+2010-2014, U+2018-201F, U+2022, U+2026, U+2032-2033, U+20AC;
+}
+
+@font-face {
+  font-family: "Lyth Mono Web";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 600;
+  src: url("/fonts/lythmono-bold-subset.woff2") format("woff2");
+  unicode-range: U+0020-007E, U+00A0-00FF, U+0283-0295, U+02C8, U+02D0, U+1D25, U+2010-2014, U+2018-201F, U+2022, U+2026, U+2032-2033, U+20AC;
+}
+
+@font-face {
+  font-family: "Lyth Mono Web";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url("/fonts/lythmono-bold-subset.woff2") format("woff2");
+  unicode-range: U+0020-007E, U+00A0-00FF, U+0283-0295, U+02C8, U+02D0, U+1D25, U+2010-2014, U+2018-201F, U+2022, U+2026, U+2032-2033, U+20AC;
+}
+
 :root {
   color-scheme: dark;
-  --bg-outer: #2c2824;
-  --bg: #211e1b;
-  --bg-elevated: #2c2824;
-  --surface: #26211e;
-  --surface-elevated: #2b2622;
-  --text: #cbc4bf;
-  --text-muted: #9f9690;
+  --bg-outer: #16161d;
+  --bg: #1f1f28;
+  --bg-elevated: #2a2a37;
+  --surface: #181820;
+  --surface-elevated: #2a2a37;
+  --text: #d6d6d8;
+  --text-muted: #92929e;
   --muted: var(--text-muted);
-  --border: #4a4038;
-  --border-soft: #3a322c;
-  --link: #d19f7b;
-  --link-hover: #e2b69a;
-  --image-filter: brightness(0.78);
-  --image-filter-hover: brightness(1);
+  --border: #54546d;
+  --border-soft: #363646;
+  --link: #7fb4ca;
+  --link-hover: #a3d4d5;
+  --strong: #f0f0f2;
+  --selection-bg: #2d4f67;
+  --code-inline-bg: #2a2a37;
+  --code-inline-text: #d6d6d8;
+  --code-block-bg: #16161d;
+  --code-block-text: #d6d6d8;
+  --code-border: #54546d;
+  --image-filter: brightness(0.86) saturate(0.9);
+  --image-filter-hover: brightness(1) saturate(1);
 }
 
 .theme-light {
   color-scheme: light;
-  --bg-outer: #f2f1ee;
-  --bg: #fbfbfb;
-  --bg-elevated: #ffffff;
-  --surface: #f8f7f5;
-  --surface-elevated: #ffffff;
-  --text: #2e2e2e;
-  --text-muted: #6f6a66;
+  --bg-outer: #d8dde7;
+  --bg: #e8ebf1;
+  --bg-elevated: #f0f2f6;
+  --surface: #dfe4ec;
+  --surface-elevated: #edf0f5;
+  --text: #20232b;
+  --text-muted: #49515f;
   --muted: var(--text-muted);
-  --border: #e2d9d3;
-  --border-soft: #ece4df;
-  --link: #d65c5c;
-  --link-hover: #b94747;
-  --image-filter: brightness(0.99) saturate(0.98);
+  --border: #8f99aa;
+  --border-soft: #b9c0cc;
+  --link: #3d6784;
+  --link-hover: #2f506a;
+  --strong: #11131a;
+  --selection-bg: #b5cbd2;
+  --code-inline-bg: #dbe1e9;
+  --code-inline-text: #20232b;
+  --code-block-bg: #1f1f28;
+  --code-block-text: #d6d6d8;
+  --code-border: #54546d;
+  --image-filter: brightness(0.88) saturate(0.9);
   --image-filter-hover: brightness(1) saturate(1);
 }
 
 html {
   background-color: var(--bg-outer);
+  scrollbar-color: var(--border) var(--bg-outer);
 }
 
 body {
+  font-size: 16px;
   scroll-padding-top: 100px;
   overflow-y: auto;
   @apply bg-[var(--bg)] text-[var(--text)];
-  @apply max-w-4xl mx-auto min-h-screen;
+  @apply font-sans;
+  @apply max-w-[60rem] mx-auto min-h-screen;
   @apply lg:px-15 md:px-15 px-5;
+}
+
+@media (min-width: 768px) {
+  body {
+    font-size: 17px;
+  }
 }
 
 a {
@@ -64,6 +159,18 @@ a:focus-visible {
   text-underline-offset: 2px;
 }
 
+a[aria-current="page"] {
+  color: var(--strong);
+  text-decoration: underline;
+  text-decoration-color: var(--link);
+  text-underline-offset: 3px;
+}
+
+::selection {
+  background-color: var(--selection-bg);
+  color: var(--strong);
+}
+
 p, span, li {
   color: var(--text);
 }
@@ -71,7 +178,7 @@ p, span, li {
 .theme-dark img:not(.no-dim-image),
 .theme-light img:not(.no-dim-image) {
   filter: var(--image-filter);
-  transition: filter 180ms ease, transform 180ms ease;
+  transition: filter 180ms ease;
 }
 
 .theme-dark img:not(.no-dim-image):hover,
@@ -93,6 +200,6 @@ p, span, li {
 }
 
 @theme {
-  --font-sans: var(--font-ibm-plex-mono);
-  --font-mono: var(--font-cascadia-mono);
+  --font-sans: "Atkinson Hyperlegible", "Lyth Mono Web", sans-serif;
+  --font-mono: "Lyth Mono Web", monospace;
 }

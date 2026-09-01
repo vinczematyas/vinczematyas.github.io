@@ -3,6 +3,13 @@ import GlobalHead from '@components/GlobalHead.astro';
 import Header from '@components/Header.astro';
 import Footer from '@components/Footer.astro';
 import '@styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
 ---
 
 <html lang='en'>
@@ -41,14 +48,13 @@ import '@styles/global.css';
         });
       })();
     </script>
-    <GlobalHead />
+    <GlobalHead title={title} description={description} />
   </head>
   <body class='flex flex-col min-h-screen'>
     <Header />
-    <main class='flex-grow'>
+    <main class='flex-1'>
       <slot />
     </main>
     <Footer />
   </body>
 </html>
-

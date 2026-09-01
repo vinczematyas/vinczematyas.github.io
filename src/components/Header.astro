@@ -1,17 +1,73 @@
 ---
 import Link from '@components/Link.astro';
+import SocialIcons from '@components/SocialIcons.astro';
 import ThemeToggle from '@components/ThemeToggle.astro';
+
+const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
+const isCurrent = (href: string): boolean => href === "/"
+  ? currentPath === "/"
+  : currentPath === href || currentPath.startsWith(`${href}/`);
 ---
 
-<header class="text-center font-mono pt-3 pb-10">
-  <div class="flex items-center justify-center gap-2">
-    <Link href='/'>home</Link>
-    <span class="text-[var(--muted)]">{'/'}</span>
-    <Link href='/publications'>publications</Link>
-    <span class="text-[var(--muted)]">{'/'}</span>
-    <Link href='/CV_MatyasVincze.pdf' external=true>cv</Link>
-    <span class="text-[var(--muted)]">{'/'}</span>
-    <ThemeToggle />
+<header class="mb-8 border-b border-[var(--border-soft)] pb-2 pt-3 font-mono">
+  <div class="relative flex items-center justify-between gap-x-4">
+    <SocialIcons icon_size={'text-lg'} />
+    <button
+      id="nav-menu-toggle"
+      type="button"
+      class="ml-auto inline-flex h-8 w-8 items-center justify-center text-[var(--link)] transition-colors duration-200 ease-out hover:text-[var(--link-hover)] focus-visible:text-[var(--link-hover)] focus-visible:outline-none sm:hidden"
+      aria-label="Toggle navigation menu"
+      aria-controls="primary-navigation"
+      aria-expanded="false"
+    >
+      <span class="flex flex-col gap-1" aria-hidden="true">
+        <span class="block h-px w-5 bg-current"></span>
+        <span class="block h-px w-5 bg-current"></span>
+        <span class="block h-px w-5 bg-current"></span>
+      </span>
+    </button>
+    <nav
+      id="primary-navigation"
+      class="absolute right-0 top-10 z-20 hidden min-w-36 flex flex-col items-end gap-2 rounded-md border border-[var(--border-soft)] bg-[var(--bg)] px-3 py-2 text-sm shadow-md sm:static sm:ml-auto sm:flex sm:w-auto sm:min-w-0 sm:flex-row sm:items-center sm:gap-2 sm:border-0 sm:bg-transparent sm:p-0 sm:shadow-none"
+      aria-label="Primary navigation"
+    >
+      <Link href='/' ariaCurrent={isCurrent("/") ? "page" : undefined}>home</Link>
+      <span class="hidden text-[var(--muted)] sm:inline">{'/'}</span>
+      <Link href='/publications' ariaCurrent={isCurrent("/publications") ? "page" : undefined}>publications</Link>
+      <span class="hidden text-[var(--muted)] sm:inline">{'/'}</span>
+      <Link href='/CV_MatyasVincze.pdf' external>cv</Link>
+      <span class="hidden text-[var(--muted)] sm:inline">{'/'}</span>
+      <ThemeToggle />
+    </nav>
   </div>
 </header>
 
+<script>
+  (() => {
+    const button = document.getElementById("nav-menu-toggle");
+    const navigation = document.getElementById("primary-navigation");
+    if (!button || !navigation) return;
+
+    const closeMenu = () => {
+      button.setAttribute("aria-expanded", "false");
+      navigation.classList.add("hidden");
+    };
+
+    button.addEventListener("click", () => {
+      const isOpen = button.getAttribute("aria-expanded") === "true";
+      button.setAttribute("aria-expanded", String(!isOpen));
+      navigation.classList.toggle("hidden", isOpen);
+    });
+
+    navigation.addEventListener("click", (event) => {
+      if (!(event.target instanceof HTMLAnchorElement)) return;
+      closeMenu();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape" || button.getAttribute("aria-expanded") !== "true") return;
+      closeMenu();
+      button.focus();
+    });
+  })();
+</script>

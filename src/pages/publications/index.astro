@@ -1,30 +1,77 @@
 ---
 import Layout from '@layouts/Layout.astro';
-import Link from '@components/Link.astro';
 import PublicationCard from '@components/PublicationCard.astro';
 
 import { getCollection } from 'astro:content';
 
-import smose from '../../content/publications/smose/smose.png';
-import lastexam from '../../content/publications/lastexam/lastexam.png';
-
-const publicationImages = {
-  lastexam: lastexam,
-  smose: smose
-};
-
 const publications = (await getCollection('publications'))
   .filter((publication) => publication.data.draft !== true)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const personId = "https://vinczematyas.github.io/#person";
+const structuredArticles: Record<string, Record<string, unknown>> = {
+  lastexam: {
+    "@type": "ScholarlyArticle",
+    "@id": "https://www.nature.com/articles/s41586-025-09962-4#article",
+    name: publications.find((publication) => publication.id === "lastexam")?.data.title,
+    url: "https://www.nature.com/articles/s41586-025-09962-4",
+    datePublished: "2026-01-28",
+    description: "Introduces Humanity’s Last Exam, a benchmark of expert-level academic questions for evaluating advanced AI systems.",
+    author: [
+      { "@type": "Organization", name: "Center for AI Safety", url: "https://safe.ai/" },
+      { "@type": "Organization", name: "Scale AI", url: "https://scale.com/" },
+      { "@type": "Organization", name: "HLE Contributors Consortium" },
+    ],
+    contributor: { "@id": personId },
+    isPartOf: { "@type": "Periodical", name: "Nature" },
+  },
+  smose: {
+    "@type": "ScholarlyArticle",
+    "@id": "https://doi.org/10.1609/aaai.v39i20.35394#article",
+    name: publications.find((publication) => publication.id === "smose")?.data.title,
+    url: "https://doi.org/10.1609/aaai.v39i20.35394",
+    datePublished: "2025-04-11",
+    description: "Introduces a sparse top-1 mixture of shallow linear policy experts that outperformed recent interpretable baselines on five of six MuJoCo tasks while using 108–672 active actor parameters.",
+    author: [
+      { "@id": personId },
+      { "@type": "Person", name: "Laura Ferrarotti" },
+      { "@type": "Person", name: "Leonardo Lucio Custode" },
+      { "@type": "Person", name: "Bruno Lepri" },
+      { "@type": "Person", name: "Giovanni Iacca" },
+    ],
+    isPartOf: {
+      "@type": "CreativeWork",
+      name: "Thirty-Ninth AAAI Conference on Artificial Intelligence",
+    },
+  },
+};
+
+const publicationsStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "@id": "https://vinczematyas.github.io/publications/#list",
+  name: "Publications by Mátyás Vincze",
+  numberOfItems: publications.length,
+  itemListOrder: "https://schema.org/ItemListOrderDescending",
+  itemListElement: publications.map((publication, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    item: structuredArticles[publication.id],
+  })),
+};
 ---
 
-<Layout>
+<Layout
+  title="Publications"
+  description="Publications by Mátyás Vincze on interpretable reinforcement learning and AI evaluation."
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(publicationsStructuredData)} />
+  <h1 class="mb-3 text-3xl font-[500] text-[var(--text)]">Publications</h1>
   <ul class='not-prose flex flex-col gap-3'>
     {publications.map((publication) => (
       <li>
-        <PublicationCard publication={publication} publicationCardImage={publicationImages[publication.id]} /> 
+        <PublicationCard publication={publication} />
       </li>
     ))}
   </ul> 
 </Layout>
-

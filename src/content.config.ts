@@ -5,6 +5,7 @@ const publications = defineCollection({
     loader: glob({ pattern: '**/[^_]*.md', base: './src/content/publications/' }),
     schema: z.object({
         title: z.string(),
+        summary: z.string(),
         mainTitlePart: z.string(),
         secondaryTitlePart: z.string(),
         authors: z.string(),
@@ -24,4 +25,3 @@ const publications = defineCollection({
 });
 
 export const collections = { publications };
-

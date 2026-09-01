@@ -45,7 +45,7 @@
     if (!button) return;
     const storageKey = "preferred-color-scheme";
 
-    const applyTheme = (theme) => {
+    const applyTheme = (theme: "light" | "dark") => {
       const isLight = theme === "light";
       root.classList.toggle("theme-light", isLight);
       root.classList.toggle("theme-dark", !isLight);

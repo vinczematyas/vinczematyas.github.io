@@ -1,5 +1,6 @@
 ---
 title: "SMoSE: Sparse Mixture of Shallow Experts for Interpretable Reinforcement Learning in Continuous Control Tasks"
+summary: "First-author work on sparse, interpretable reinforcement-learning policies with only 108–672 active actor parameters."
 mainTitlePart: "SMoSE: Sparse Mixture of Shallow Experts"
 secondaryTitlePart: "for Interpretable Reinforcement Learning in Continuous Control Tasks"
 authors: "Mátyás Vincze, Laura Ferrarotti, Leonardo Lucio Custode, Bruno Lepri, Giovanni Iacca"
@@ -8,12 +9,12 @@ trim_names: true
 authorLinks: "https://vinczematyas.github.io/, https://scholar.google.com/citations?user=mBp8qBAAAAAJ&hl=en/, https://scholar.google.com/citations?user=3qvS-AwAAAAJ&hl=en/, https://scholar.google.com/citations?user=JfcopG0AAAAJ&hl=en/, https://sites.google.com/site/giovanniiacca/"
 authorAffiliations: "University of Trento, Fondazione Bruno Kessler"
 authorAffiliationsMap: "1, 2; 2; 1; 2; 1"
-externalAffiliatedLinks: "Paper: https://ojs.aaai.org/index.php/AAAI/article/view/35394, Code: https://github.com/vinczematyas/SMoSE, Twitter: https://x.com/vinczematyas_/status/1869380464030679489"
-localAffiliatedLinks: "Poster: poster.png"
+externalAffiliatedLinks: "Paper: https://doi.org/10.1609/aaai.v39i20.35394, arXiv: https://arxiv.org/abs/2412.13053, Code: https://github.com/vinczematyas/SMoSE, BibTeX: /publications/smose.bib, AAAI materials: https://underline.io/lecture/112267-smose-sparse-mixture-of-shallow-experts-for-interpretable-reinforcement-learning-in-continuous-control-tasks"
+localAffiliatedLinks: ""
 conf: "Thirty-Ninth AAAI Conference on Artificial Intelligence"
 confShort: "AAAI"
 date: 2025-04-11
-website: "local"
+website: "https://doi.org/10.1609/aaai.v39i20.35394"
 draft: false
 ---
 
@@ -28,4 +29,3 @@ Continuous control tasks often involve high-dimensional, dynamic, and non-linear
 ---
 
 # Coming soon!
-
