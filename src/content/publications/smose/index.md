@@ -9,7 +9,7 @@ trim_names: true
 authorLinks: "https://vinczematyas.github.io/, https://scholar.google.com/citations?user=mBp8qBAAAAAJ&hl=en/, https://scholar.google.com/citations?user=3qvS-AwAAAAJ&hl=en/, https://scholar.google.com/citations?user=JfcopG0AAAAJ&hl=en/, https://sites.google.com/site/giovanniiacca/"
 authorAffiliations: "University of Trento, Fondazione Bruno Kessler"
 authorAffiliationsMap: "1, 2; 2; 1; 2; 1"
-externalAffiliatedLinks: "Paper: https://doi.org/10.1609/aaai.v39i20.35394, arXiv: https://arxiv.org/abs/2412.13053, Code: https://github.com/vinczematyas/SMoSE, BibTeX: /publications/smose.bib, AAAI materials: https://underline.io/lecture/112267-smose-sparse-mixture-of-shallow-experts-for-interpretable-reinforcement-learning-in-continuous-control-tasks"
+externalAffiliatedLinks: "Paper: https://doi.org/10.1609/aaai.v39i20.35394, arXiv: https://arxiv.org/abs/2412.13053, Code: https://github.com/vinczematyas/SMoSE, AAAI materials: https://underline.io/lecture/112267-smose-sparse-mixture-of-shallow-experts-for-interpretable-reinforcement-learning-in-continuous-control-tasks"
 localAffiliatedLinks: ""
 conf: "Thirty-Ninth AAAI Conference on Artificial Intelligence"
 confShort: "AAAI"

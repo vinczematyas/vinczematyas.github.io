@@ -2,36 +2,16 @@
      viewBox="0 0 64 64"
      role="img"
      aria-labelledby="title">
-  <title id="title">Recursive dragon curve favicon</title>
+  <title id="title">Mátyás Vincze monogram</title>
   <style>
-    .frame {
-      fill: #1f1f28;
-      stroke: #54546d;
-    }
-    .start { stop-color: #7fb4ca; }
-    .end   { stop-color: #a3d4d5; }
+    .tile { fill: #1f1f28; }
+    .monogram { fill: #a3d4d5; }
     @media (prefers-color-scheme: light) {
-      .frame {
-        fill: #e8ebf1;
-        stroke: #8f99aa;
-      }
-      .start { stop-color: #3d6784; }
-      .end   { stop-color: #2f506a; }
+      .tile { fill: #e8ebf1; }
+      .monogram { fill: #2f506a; }
     }
   </style>
-  <defs>
-    <linearGradient id="curve" x1="0" y1="1" x2="1" y2="0">
-      <stop class="start" offset="0"/>
-      <stop class="end" offset="1"/>
-    </linearGradient>
-  </defs>
-  <rect class="frame"
-        x="1.5" y="1.5" width="61" height="61" rx="14"
-        stroke-width="1.75"/>
-  <polyline points="20.000,41.000 14.000,47.000 20.000,53.000 26.000,47.000 32.000,53.000 38.000,47.000 32.000,41.000 38.000,35.000 44.000,41.000 50.000,35.000 44.000,29.000 38.000,35.000 32.000,29.000 38.000,23.000 32.000,17.000 38.000,11.000 44.000,17.000"
-            fill="none"
-            stroke="url(#curve)"
-            stroke-width="4.6"
-            stroke-linecap="round"
-            stroke-linejoin="round"/>
+  <rect class="tile" width="64" height="64" rx="9"/>
+  <path class="monogram" d="M7 56V12H21L32 26L43 12H57V56H7Z"/>
+  <path class="tile" d="M18 34H25L32 45L39 34H46L32 59Z"/>
 </svg>

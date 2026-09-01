@@ -9,7 +9,7 @@ trim_names: false
 authorLinks: "https://safe.ai/, https://scale.com/"
 authorAffiliations: ""
 authorAffiliationsMap: ""
-externalAffiliatedLinks: "Paper: https://www.nature.com/articles/s41586-025-09962-4, BibTeX: /publications/hle.bib, Website: https://agi.safe.ai/"
+externalAffiliatedLinks: "Paper: https://www.nature.com/articles/s41586-025-09962-4, Website: https://agi.safe.ai/"
 localAffiliatedLinks: ""
 conf: "Nature 649, 1139–1146"
 confShort: "Nature"

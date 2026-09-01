@@ -1,13 +1,11 @@
 ---
 import Link from '@components/Link.astro';
-import SocialIcons from '@components/SocialIcons.astro';
 ---
 
-<footer class="text-sm opacity-90 font-mono mt-10 mb-5">
-  <SocialIcons icon_size={'text-lg'} />
-  <p class='mt-0.5'>&copy; {new Date().getFullYear()} Mátyás Vincze</p>
-  Built with Astro based on 
-  <Link href='https://astro-micro-academic.vercel.app/' external>Astro Micro Academic</Link>
-  and
-  <Link href='https://herman.bearblog.dev/silence/' external>Bear ʕ•ᴥ•ʔ</Link>
+<footer class="mb-5 mt-10 flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-xs text-[var(--muted)] sm:text-sm">
+  <span class="text-[var(--muted)]">&copy; {new Date().getFullYear()} Mátyás Vincze</span>
+  <span class="inline-flex items-center gap-x-2 text-[var(--muted)]">
+    <span aria-hidden="true">&middot;</span>
+    <Link href='mailto:matyas1vincze@gmail.com'>Email</Link>
+  </span>
 </footer>

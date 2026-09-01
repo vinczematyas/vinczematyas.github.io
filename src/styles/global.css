@@ -81,7 +81,7 @@
   --surface: #181820;
   --surface-elevated: #2a2a37;
   --text: #d6d6d8;
-  --text-muted: #92929e;
+  --text-muted: #a0a0aa;
   --muted: var(--text-muted);
   --border: #54546d;
   --border-soft: #363646;
@@ -132,10 +132,9 @@ body {
   font-size: 16px;
   scroll-padding-top: 100px;
   overflow-y: auto;
-  @apply bg-[var(--bg)] text-[var(--text)];
+  @apply bg-[var(--bg-outer)] text-[var(--text)];
   @apply font-sans;
-  @apply max-w-[60rem] mx-auto min-h-screen;
-  @apply lg:px-15 md:px-15 px-5;
+  @apply min-h-screen;
 }
 
 @media (min-width: 768px) {
@@ -169,10 +168,6 @@ a[aria-current="page"] {
 ::selection {
   background-color: var(--selection-bg);
   color: var(--strong);
-}
-
-p, span, li {
-  color: var(--text);
 }
 
 .theme-dark img:not(.no-dim-image),

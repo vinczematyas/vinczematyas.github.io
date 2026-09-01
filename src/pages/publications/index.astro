@@ -67,11 +67,11 @@ const publicationsStructuredData = {
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(publicationsStructuredData)} />
   <h1 class="mb-3 text-3xl font-[500] text-[var(--text)]">Publications</h1>
-  <ul class='not-prose flex flex-col gap-3'>
+  <ul class='not-prose'>
     {publications.map((publication) => (
       <li>
         <PublicationCard publication={publication} />
       </li>
     ))}
-  </ul> 
+  </ul>
 </Layout>
