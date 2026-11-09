@@ -66,7 +66,16 @@ const publicationsStructuredData = {
   description="Publications by Mátyás Vincze on interpretable reinforcement learning and AI evaluation."
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(publicationsStructuredData)} />
-  <h1 class="mb-3 text-3xl font-[500] text-[var(--text)]">Publications</h1>
+  <h1 class="mb-3 text-3xl font-[500] text-[var(--text)]">
+    <img
+      src="/pixel-books.png"
+      alt=""
+      width="48"
+      height="48"
+      class="no-dim-image mr-2 inline-block h-12 w-12 align-middle [image-rendering:pixelated]"
+    />
+    Publications
+  </h1>
   <ul class='not-prose'>
     {publications.map((publication) => (
       <li>
